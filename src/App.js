@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {Form, FormGroup, Input, Label, Button} from 'reactstrap'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor() {
+        super()
+        this.state = {
+            name: '',
+            email: '',
+            message: ''
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange = e => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    handleSubmit(e) {
+    e.preventDefault()
+      const {name,email,message}=this.state
+    }
+
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit} style={{width: '600px'}}>
+                <FormGroup>
+                    <Label for="name">Name:</Label>
+                    <Input
+                        type="text"
+                        name="name"
+                        onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="email">Email:</Label>
+                    <Input
+                        type="text"
+                        name="email"
+                        onChange={this.handleChange}/>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="message">Message:</Label>
+                    <Input
+                        type="textarea"
+                        name="message"
+                        onChange={this.handleChange}/>
+                </FormGroup>
+                <Button>Submit</Button>
+            </Form>
+        );
+    }
 }
 
 export default App;
